@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🧠 MindVault 🔐</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🧠 MindVault 🔐</h1>
+
+    <div id="progress-info">📈 Round: <span id="round">1</span></div>
+
+    <input
+      type="text"
+      id="field1"
+      name="field1"
+      placeholder="👤"
+      maxlength="1"
+      autocomplete="off"
+      autocorrect="off"
+      autocapitalize="none"
+      spellcheck="false"
+      tabindex="1"
+    >
+
+    <input
+      type="text"
+      id="field2"
+      name="field2"
+      placeholder="🔑"
+      maxlength="1"
+      autocomplete="off"
+      autocorrect="off"
+      autocapitalize="none"
+      spellcheck="false"
+      tabindex="2"
+    >
+
+    <!-- Main action buttons -->
+    <button id="submit-btn" tabindex="3">🚀 Submit Credentials</button>
+    <button id="help-btn" tabindex="4">❓ Help</button>
+    <button id="new-game-btn" tabindex="5">🔄 New Game</button>
+
+    <div id="feedback"></div>
+    <div id="countdown"></div>
+
+    <div id="leaderboard">
+      <h3>🏆 Top 10 Scores</h3>
+      <ol id="score-list"></ol>
+    </div>
+  </div>
+
+  <!-- Help Modal -->
+  <div id="help-modal" class="modal hidden">
+    <div class="modal-content">
+      <span id="close-modal">&times;</span>
+      <h2>❓ How to Play MindVault 🧠🔐</h2>
+      <p>
+        1. Enter a username and password with the exact number of letters shown.<br>
+        2. Click or press Enter on <strong>Submit Credentials</strong>.<br>
+        3. Wait the specified time, then re-enter those same credentials to log in.<br>
+        4. If successful 🎉, the next round adds +1 letter & +1 second wait.<br>
+        5. Keep going to achieve the highest round possible! 📈✨<br><br>
+        ⚡ <em>Press ESC to close this window any time.</em>
+      </p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
