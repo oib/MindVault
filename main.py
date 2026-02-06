@@ -82,6 +82,22 @@ async def generate_credentials(length: int):
     password = ''.join(random.choice(chars) for _ in range(length))
     return {"username": username, "password": password}
 
+# Reset game endpoint
+@app.post("/newgame")
+async def new_game():
+    global CREDENTIAL_FILE, HIGHSCORE_FILE
+    # Clear current credentials
+    if os.path.exists(CREDENTIAL_FILE):
+        os.remove(CREDENTIAL_FILE)
+    return JSONResponse({"status": "reset"})
+
+# Clear high scores endpoint
+@app.post("/clearscores")
+async def clear_highscores():
+    if os.path.exists(HIGHSCORE_FILE):
+        os.remove(HIGHSCORE_FILE)
+    return JSONResponse({"status": "cleared"})
+
 # Static file handling (CSS, JS)
 from fastapi.staticfiles import StaticFiles
 app.mount("/", StaticFiles(directory="static", html=True), name="static")

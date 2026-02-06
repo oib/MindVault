@@ -11,9 +11,16 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById("submit-btn").onclick = submitCredentials;
   document.getElementById("help-btn").onclick = showHelpModal;
   document.getElementById("new-game-btn").onclick = startNewGame;
+  document.getElementById("clear-scores-btn").onclick = clearHighScores;
 
-  loadHighScores();
+  displayHighScores();
   fetchInitialCredentials();
+  
+  // Prevent context menu and drag on credential display
+  document.getElementById('feedback').addEventListener('contextmenu', e => e.preventDefault());
+  document.getElementById('feedback').addEventListener('dragstart', e => e.preventDefault());
+  document.getElementById('field1').addEventListener('contextmenu', e => e.preventDefault());
+  document.getElementById('field2').addEventListener('contextmenu', e => e.preventDefault());
 });
 
 function fetchInitialCredentials() {
@@ -29,11 +36,12 @@ function fetchInitialCredentials() {
           });
       feedback(`👤 ${creds.username}\n🔑 ${creds.password}\nMemorize & wait ${waitTime}s`, 'highlight');
       updatePlaceholders();
+      clearInputs();
+      disableInputs();
 
       startCountdown(waitTime, () => {
         feedback('🔑 Now type your NEW credentials!', 'highlight');
-        clearInputs();
-        document.getElementById('field1').focus();
+        enableInputs();
       });
     });
 }
@@ -76,16 +84,18 @@ function submitCredentials() {
 🔑 ${creds.password}
 Memorize & wait ${waitTime}s`, 'highlight');
 
+          updatePlaceholders();
+          disableInputs();
+
           startCountdown(waitTime, () => {
             feedback('🔑 Now type your NEW credentials!', 'highlight');
             clearInputs();
-            document.getElementById('field1').focus();
+            enableInputs();
             inProgress = false;
           });
         });
 
-      updatePlaceholders();
-      loadHighScores();
+      displayHighScores();
     } else {
       feedback('❌ Wrong credentials. Try again!', 'failure');
       inProgress = false;
@@ -119,6 +129,21 @@ function clearInputs() {
   document.getElementById('field2').value = '';
 }
 
+function disableInputs() {
+  document.getElementById('field1').disabled = true;
+  document.getElementById('field2').disabled = true;
+  document.getElementById('field1').style.cursor = 'not-allowed';
+  document.getElementById('field2').style.cursor = 'not-allowed';
+}
+
+function enableInputs() {
+  document.getElementById('field1').disabled = false;
+  document.getElementById('field2').disabled = false;
+  document.getElementById('field1').style.cursor = 'text';
+  document.getElementById('field2').style.cursor = 'text';
+  document.getElementById('field1').focus();
+}
+
 function updatePlaceholders() {
   const f1 = document.getElementById('field1');
   const f2 = document.getElementById('field2');
@@ -128,18 +153,31 @@ function updatePlaceholders() {
   f2.maxLength = round;
 }
 
-function loadHighScores() {
+function displayHighScores() {
   fetch('/highscores')
     .then(r => r.json())
     .then(data => {
       const list = document.getElementById('score-list');
       list.innerHTML = '';
-      data.highscores.forEach(([u, s]) => {
+      data.highscores.forEach(([name, score]) => {
         const li = document.createElement('li');
-        li.innerText = `${u} – Round ${s}`;
+        li.innerText = `${name}: Round ${score}`;
         list.appendChild(li);
       });
     });
+}
+
+function clearHighScores() {
+  if (confirm('Are you sure you want to clear all high scores? This cannot be undone!')) {
+    fetch('/clearscores', {method:'POST'})
+      .then(r => r.json())
+      .then(d => {
+        if (d.status === "cleared") {
+          feedback('🗑️ All high scores cleared!', 'highlight');
+          displayHighScores();
+        }
+      });
+  }
 }
 
 function startNewGame() {
@@ -149,12 +187,13 @@ function startNewGame() {
   feedback(`🔄 New Game! Round 2, wait 10s`, 'highlight');
   clearInputs();
   updatePlaceholders();
+  enableInputs();
   inProgress = false;
 
   fetch('/newgame', {method:'POST'})
     .then(r => r.json())
     .then(d => {
-      if (d.status === "cleared") loadHighScores();
+      if (d.status === "reset") displayHighScores();
       fetchInitialCredentials();
     });
 }

@@ -12,11 +12,11 @@ body {
 
 .container {
     background-color: #FFFFFF;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
     text-align: center;
-    width: 340px;
+    width: 380px;
 }
 
 /* --- Input Fields --- */
@@ -29,10 +29,33 @@ input {
     font-size: 16px;
     text-align: center;
     outline: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 input:focus {
     border-color: #F39C12;
+}
+
+input:disabled {
+    background-color: #F8F9FA !important;
+    border-color: #CED4DA !important;
+    color: #6C757D !important;
+    cursor: not-allowed !important;
+    opacity: 0.6;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+input:not(:disabled) {
+    user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
 }
 
 /* --- Buttons --- */
@@ -40,16 +63,43 @@ button {
     background-color: #4A90E2;
     color: #FFFFFF;
     border: none;
-    padding: 10px 15px;
+    padding: 12px 20px;
     font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-    margin-top: 10px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    margin: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: inline-block;
 }
 
 button:hover {
     background-color: #357ABD;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Submit button on its own row */
+#submit-btn {
+    display: block;
+    width: 90%;
+    margin: 20px auto 15px auto;
+    font-size: 18px;
+    padding: 15px;
+}
+
+/* Other buttons in a row */
+.button-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
 }
 
 /* Help Button */
@@ -62,19 +112,86 @@ button:hover {
     background-color: #D68910;
 }
 
-/* --- Feedback and Countdown --- */
-#feedback {
-    margin-top: 15px;
-    font-size: 18px;
+/* New Game Button */
+#new-game-btn {
+    background-color: #27AE60;
 }
 
-.success { color: #2ECC71; }
-.failure { color: #E74C3C; }
-.highlight { color: #F39C12; }
+#new-game-btn:hover {
+    background-color: #229954;
+}
+
+/* Theme Toggle Button */
+#theme-toggle {
+    background-color: #6C757D;
+}
+
+#theme-toggle:hover {
+    background-color: #5A6268;
+}
+
+/* Clear Scores Button */
+#clear-scores-btn {
+    background-color: #E74C3C;
+    font-size: 14px;
+    padding: 8px 15px;
+    margin: 15px auto 0 auto;
+    display: block;
+    width: 90%;
+}
+
+#clear-scores-btn:hover {
+    background-color: #C0392B;
+}
+
+/* --- Feedback and Countdown --- */
+#feedback {
+    margin: 20px 0;
+    font-size: 20px;
+    font-weight: bold;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #F8F9FA;
+    border-radius: 8px;
+    padding: 15px;
+    border: 2px solid #E9ECEF;
+    white-space: pre-line;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.success { 
+    color: #2ECC71;
+    text-shadow: 0 1px 2px rgba(46, 204, 113, 0.3);
+}
+
+.failure { 
+    color: #E74C3C;
+    text-shadow: 0 1px 2px rgba(231, 76, 60, 0.3);
+}
+
+.highlight { 
+    color: #F39C12;
+    text-shadow: 0 1px 2px rgba(243, 156, 18, 0.3);
+}
 
 #countdown {
-    margin-top: 10px;
-    font-size: 16px;
+    margin: 15px 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: #E74C3C;
+    text-shadow: 0 2px 4px rgba(231, 76, 60, 0.3);
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
 }
 
 /* --- Leaderboard --- */

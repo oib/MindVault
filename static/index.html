@@ -4,7 +4,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🧠 MindVault 🔐</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Critical CSS to prevent flash */
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      color: #E8E8E8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background-color: #2C3E50;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      text-align: center;
+      width: 360px;
+      border: 2px solid #3498DB;
+      visibility: hidden;
+    }
+    .loaded {
+      visibility: visible;
+    }
+  </style>
+  <link rel="stylesheet" href="style-dark.css" id="theme-style" media="print" onload="this.media='all'; document.getElementById('theme-style').onload=null; document.querySelector('.container').classList.add('loaded')">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
   <div class="container">
@@ -38,18 +66,21 @@
       tabindex="2"
     >
 
-    <!-- Main action buttons -->
-    <button id="submit-btn" tabindex="3">🚀 Submit Credentials</button>
-    <button id="help-btn" tabindex="4">❓ Help</button>
-    <button id="new-game-btn" tabindex="5">🔄 New Game</button>
-
     <div id="feedback"></div>
     <div id="countdown"></div>
+
+    <!-- Main action buttons -->
+    <button id="submit-btn" tabindex="3">🚀 Submit Credentials</button>
+    <div class="button-row">
+      <button id="help-btn" tabindex="4">❓ Help</button>
+      <button id="new-game-btn" tabindex="5">🔄 New Game</button>
+    </div>
 
     <div id="leaderboard">
       <h3>🏆 Top 10 Scores</h3>
       <ol id="score-list"></ol>
     </div>
+    <button id="clear-scores-btn" tabindex="6">🗑️ Clear Scores</button>
   </div>
 
   <!-- Help Modal -->
@@ -69,6 +100,15 @@
   </div>
 
   <script src="app.js"></script>
+  <script>
+    // Fallback to show content if CSS takes too long
+    setTimeout(() => {
+      const container = document.querySelector('.container');
+      if (container && !container.classList.contains('loaded')) {
+        container.classList.add('loaded');
+      }
+    }, 1000);
+  </script>
 </body>
 </html>
 
