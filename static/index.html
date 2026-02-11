@@ -35,10 +35,11 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-  <div class="container">
-    <h1>🧠 MindVault 🔐</h1>
+  <div class="main-wrapper">
+    <div class="container">
+      <h1>🧠 MindVault 🔐</h1>
 
-    <div id="progress-info">📈 Round: <span id="round">1</span></div>
+      <div id="progress-info">📈 Round: <span id="round">1</span></div>
 
     <input
       type="text"
@@ -81,7 +82,26 @@
       <ol id="score-list"></ol>
     </div>
     <button id="clear-scores-btn" tabindex="6">🗑️ Clear Scores</button>
+    </div>
   </div>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer-content">
+      <a href="https://github.com/oib/-MindVault-" target="_blank" rel="noopener noreferrer" class="footer-link">
+        <span class="footer-icon">🐙</span>
+        <span class="footer-text">View on GitHub</span>
+      </a>
+      <a href="https://games.orangeicebear.at" target="_blank" rel="noopener noreferrer" class="footer-link">
+        <span class="footer-icon">🎮</span>
+        <span class="footer-text">More Games</span>
+      </a>
+      <a href="https://bubuit.net" target="_blank" rel="noopener noreferrer" class="footer-link">
+        <span class="footer-icon">🌐</span>
+        <span class="footer-text">bubuit.net</span>
+      </a>
+    </div>
+  </footer>
 
   <!-- Help Modal -->
   <div id="help-modal" class="modal hidden">

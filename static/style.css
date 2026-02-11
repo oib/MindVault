@@ -4,10 +4,17 @@ body {
     background-color: #ECF0F1;
     color: #34495E;
     display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.main-wrapper {
+    flex: 1;
+    display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    margin: 0;
+    padding: 20px 0;
 }
 
 .container {
@@ -255,5 +262,92 @@ button:active {
 
 .hidden {
     display: none;
+}
+
+/* --- Footer --- */
+.footer {
+    width: 100vw;
+    padding: 20px 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-top: 2px solid #B19CD9;
+    backdrop-filter: blur(10px);
+    margin-top: auto;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    padding: 15px 20px;
+    border-radius: 12px;
+    min-height: 80px;
+    justify-content: center;
+    transition: all 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.footer-link:hover {
+    transform: translateY(-5px);
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+}
+
+.footer-icon {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.footer-text {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #4A90E2;
+}
+
+.footer-link:hover .footer-text {
+    color: #F39C12;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+    .footer-content {
+        gap: 20px;
+    }
+    
+    .footer-icon {
+        font-size: 1.5rem;
+        margin-bottom: 6px;
+    }
+    
+    .footer-text {
+        font-size: 0.8rem;
+    }
+    
+    .footer-link {
+        padding: 12px 15px;
+        min-height: 70px;
+    }
+    
+    .container {
+        width: 95%;
+        padding: 20px;
+    }
+    
+    .modal-content {
+        min-width: 90%;
+        padding: 20px;
+    }
 }
 
