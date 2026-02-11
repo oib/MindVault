@@ -1,10 +1,20 @@
 # Bytecode-Dateien
 __pycache__/
 *.py[cod]
+*$py.class
+*.so
+.Python
 
 # Virtuelle Umgebungen
 .venv/
 venv/
+env/
+ENV/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
 
 # Betriebssystem-Dateien
 .DS_Store
@@ -15,7 +25,33 @@ Thumbs.db
 *.bak
 *.swp
 *.tmp
+*.temp
 
 # IDEs und Editoren
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
+
+# Windsurf
+.windsurf/
+
+# Snapshots
+.snapshots/
+
+# Project specific
+credentials.txt
+highscores.txt
+
+# Logs
+logs/
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+
+# pytest
+.pytest_cache/
